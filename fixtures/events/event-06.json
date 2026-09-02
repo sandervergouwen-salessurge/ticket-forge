@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "action": "create",
+    "entity": "activity",
+    "id": "e1a00006-0000-4000-8000-000000000006",
+    "company_id": 9876543,
+    "correlation_id": "c6f4a1-9b2e-4d77-8a10-000000000006",
+    "entity_id": 5006,
+    "is_bulk_edit": false,
+    "timestamp": "2026-09-14T09:15:00Z",
+    "type": "general",
+    "user_id": 11,
+    "version": "2.0",
+    "webhook_id": 771,
+    "webhook_owner_id": 11,
+    "change_source": "app",
+    "attempt": 1,
+    "host": "salessurge.pipedrive.com"
+  },
+  "data": {
+    "id": 5006,
+    "subject": "Follow up on renewal quote",
+    "type": "call",
+    "done": false,
+    "person_id": 202,
+    "org_id": 101,
+    "deal_id": null,
+    "owner_id": 11,
+    "add_time": "2026-09-14T09:15:00Z",
+    "update_time": "2026-09-14T09:15:00Z",
+    "note": ""
+  },
+  "previous": null
+}

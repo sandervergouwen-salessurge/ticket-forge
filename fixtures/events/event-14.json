@@ -1,0 +1,43 @@
+{
+  "v": 1,
+  "matches_filters": {
+    "current": [],
+    "previous": []
+  },
+  "meta": {
+    "v": 1,
+    "action": "added",
+    "object": "activity",
+    "id": 5011,
+    "company_id": 9876543,
+    "user_id": 11,
+    "host": "salessurge.pipedrive.com",
+    "timestamp": 1789041600,
+    "timestamp_micro": 1789041600000000,
+    "permitted_user_ids": [
+      11,
+      12,
+      13
+    ],
+    "trans_pending": false,
+    "is_bulk_update": false,
+    "pipedrive_service_name": false,
+    "matches_filters": {
+      "current": []
+    },
+    "webhook_id": "640"
+  },
+  "current": {
+    "id": 5011,
+    "subject": "[SUPPORT] Invoice PDF renders without line items",
+    "type": "task",
+    "done": 0,
+    "person_id": 201,
+    "org_id": 101,
+    "user_id": 11,
+    "add_time": "2026-10-05 09:40:00",
+    "update_time": "2026-10-05 09:40:00",
+    "active_flag": 1
+  },
+  "previous": null
+}

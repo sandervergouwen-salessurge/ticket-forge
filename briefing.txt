@@ -1,0 +1,174 @@
+================================================================================
+TICKET-FORGE - PRACTICAL EXERCISE
+Sales Surge B.V.
+================================================================================
+
+CONTEXT
+
+We are building a service desk that lives inside Pipedrive. Our clients sell
+and support from the same CRM, and today their support requests either pollute
+the sales pipeline or disappear into a second tool that knows nothing about the
+customer record.
+
+The first component of that product is an ingest service. Support requests are
+raised in Pipedrive as activities. The ingest service listens for them, turns
+them into tickets, works out who is asking and how quickly we owe them an
+answer, and stores the result.
+
+This exercise is that component, scoped down to roughly four hours. It is a
+genuine slice of the real build, not a puzzle we invented for interviews.
+
+
+--------------------------------------------------------------------------------
+WHAT YOU HAVE
+--------------------------------------------------------------------------------
+
+  src/         The service. Mostly unimplemented; a couple of files carry code
+               from an earlier internal prototype that you are free to keep,
+               rewrite or delete.
+  mock/        A local stand-in for the Pipedrive API. Do not modify it.
+  fixtures/    Fourteen recorded webhook deliveries and the expected result.
+  test/        The acceptance suite. Do not modify it.
+
+Start the mock with `npm run mock`. It listens on http://127.0.0.1:4010 and
+serves a small fixed dataset of people and organizations.
+
+
+--------------------------------------------------------------------------------
+WHAT TO BUILD
+--------------------------------------------------------------------------------
+
+An HTTP service with three routes:
+
+  POST /webhooks/pipedrive    receives one delivery
+  GET  /tickets               returns the tickets held by the service
+  GET  /health                returns 200 while the service is up
+
+The webhook route is protected with HTTP Basic authentication. Use the
+username "pipedrive" and the password "tf_hook_secret". A delivery presenting
+anything else gets 401.
+
+A delivery in a shape this service does not accept gets 400. It must not be
+half-processed and it must not take the service down.
+
+
+INGEST RULES
+
+A delivery describes an activity. It becomes a ticket when the activity is of
+type "task" and its subject begins with "[SUPPORT]". Everything else is
+acknowledged and dropped.
+
+The stored subject has the "[SUPPORT]" marker and surrounding whitespace
+removed.
+
+The same delivery may arrive more than once. Processing it a second time must
+not change anything and must not produce a second ticket.
+
+
+WHO IS ASKING
+
+The activity names a person. The person belongs to an organization. The
+organization carries a support tier in the custom field with the key:
+
+  9f2c1d4e7a8b3c5d6e0f1a2b3c4d5e6f70819a2b
+
+Read the person and the organization from the Pipedrive API to fill in the
+requester and account details on the ticket.
+
+
+HOW QUICKLY WE OWE AN ANSWER
+
+  support tier    priority    first response target
+  ------------    --------    ---------------------
+  gold            urgent      1 business hour
+  silver          high        4 business hours
+  bronze          normal      8 business hours
+  anything else   low         16 business hours
+
+"Anything else" covers a requester with no organization, and an organization
+with no tier set.
+
+The desk is staffed 09:00 to 17:00 Europe/Amsterdam, Monday to Friday. Time
+outside those hours does not count towards a target. A request raised outside
+staffed hours starts its clock when the desk next opens.
+
+
+THE TICKET RECORD
+
+  id                     "PD-" followed by the activity id
+  activity_id            integer
+  subject                marker stripped
+  status                 "open", "resolved" or "deleted"
+  priority               "urgent", "high", "normal" or "low"
+  requester_person_id    integer or null
+  requester_name         string or null
+  requester_email        string or null
+  org_id                 integer or null
+  org_name               string or null
+  support_tier           string or null
+  owner_id               integer or null
+  created_at             when the activity was created
+  sla_due_at             the first response target, as an ISO-8601 instant
+  updated_at             when this delivery occurred
+
+A completed activity makes the ticket "resolved". A removed activity makes it
+"deleted". Tickets survive a restart of the service.
+
+
+--------------------------------------------------------------------------------
+GROUND RULES
+--------------------------------------------------------------------------------
+
+Budget about four hours. We would rather see three routes that are right than
+six that are nearly right. If you run out of time, commit what you have and
+write down what you would do next.
+
+Nothing here needs a paid service, a hosted database, a deployment target or a
+credit card. If you find yourself reaching for one, you have taken a wrong
+turn.
+
+Use whatever tooling you normally use, including AI assistants. We are hiring
+people who ship with these tools, not people who avoid them. What we care
+about is the result and the reasoning, not whether you typed it by hand.
+
+Commit as you go, in whatever rhythm suits you. Work on a branch or on main,
+as you prefer.
+
+Add a NOTES.md if there is anything you want us to read: decisions you made,
+things you found, what you would change with more time. It is optional and it
+is read.
+
+
+--------------------------------------------------------------------------------
+HANDING IN
+--------------------------------------------------------------------------------
+
+  npm run verify     runs the acceptance suite and reports where you stand
+  npm run submit     builds the archive to send back
+
+Commit everything first; submit refuses to run on a dirty tree.
+
+Your submission archive contains your working tree, your full commit history,
+and workspace metadata that the project's scripts recorded locally while you
+worked: environment details, timings, and a log of the calls your service made.
+Nothing is transmitted anywhere. The archive is written to disk for you to send
+to us, and you are welcome to open it and look before you do.
+
+Send submission-<your-name>.tgz to sander.vergouwen@sales-surge.nl.
+
+
+--------------------------------------------------------------------------------
+WHAT WE ARE LOOKING AT
+--------------------------------------------------------------------------------
+
+Whether it works. Whether the parts that do not work are the parts you knew
+about. Whether you checked your answer rather than assuming it. Whether the
+code would be pleasant to pick up on a Monday morning six months from now.
+
+A passing suite is a good sign, not the whole judgement. We read the code and
+the history too.
+
+Questions that block you: sander.vergouwen@sales-surge.nl. Questions you can
+answer yourself by reading something: those are part of the exercise.
+
+================================================================================

@@ -1,0 +1,13 @@
+#!/bin/sh
+# Appends a line to the local workspace timeline. Never blocks a commit.
+DIR="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+mkdir -p "$DIR/.assessment" 2>/dev/null || exit 0
+SHA=$(git rev-parse HEAD 2>/dev/null)
+TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+FILES=$(git diff-tree --no-commit-id --name-only -r HEAD 2>/dev/null | tr '\n' ',' | sed 's/,$//')
+STAT=$(git show --shortstat --oneline HEAD 2>/dev/null | tail -1 | sed 's/"/\\"/g')
+LEN=$(git log -1 --pretty=%B 2>/dev/null | wc -c | tr -d ' ')
+printf '{"ts":"%s","kind":"commit","sha":"%s","branch":"%s","files":"%s","shortstat":"%s","msg_chars":%s}\n' \
+  "$TS" "$SHA" "$BRANCH" "$FILES" "$STAT" "$LEN" >> "$DIR/.assessment/timeline.ndjson" 2>/dev/null
+exit 0

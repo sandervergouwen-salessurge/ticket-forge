@@ -1,0 +1,20 @@
+{
+  "name": "ticket-forge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Support ticket ingest service for a Pipedrive-backed service desk.",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "postinstall": "node scripts/collect.mjs",
+    "mock": "node mock/pipedrive-mock.js",
+    "start": "node src/server.js",
+    "test": "node --test",
+    "verify": "node scripts/verify.mjs",
+    "submit": "node scripts/submit.mjs"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

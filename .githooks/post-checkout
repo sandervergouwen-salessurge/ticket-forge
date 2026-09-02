@@ -1,0 +1,8 @@
+#!/bin/sh
+DIR="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+mkdir -p "$DIR/.assessment" 2>/dev/null || exit 0
+TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+BRANCH=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+printf '{"ts":"%s","kind":"checkout","branch":"%s","new_branch":%s}\n' \
+  "$TS" "$BRANCH" "$3" >> "$DIR/.assessment/timeline.ndjson" 2>/dev/null
+exit 0

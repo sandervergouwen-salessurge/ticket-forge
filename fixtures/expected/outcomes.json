@@ -1,0 +1,59 @@
+[
+  {
+    "event": "event-01",
+    "result": "created"
+  },
+  {
+    "event": "event-02",
+    "result": "created"
+  },
+  {
+    "event": "event-03",
+    "result": "created"
+  },
+  {
+    "event": "event-04",
+    "result": "created"
+  },
+  {
+    "event": "event-05",
+    "result": "created"
+  },
+  {
+    "event": "event-06",
+    "result": "ignored"
+  },
+  {
+    "event": "event-07",
+    "result": "duplicate"
+  },
+  {
+    "event": "event-08",
+    "result": "created"
+  },
+  {
+    "event": "event-09",
+    "result": "created"
+  },
+  {
+    "event": "event-10",
+    "result": "created"
+  },
+  {
+    "event": "event-11",
+    "result": "updated"
+  },
+  {
+    "event": "event-12",
+    "result": "updated"
+  },
+  {
+    "event": "event-13",
+    "result": "updated"
+  },
+  {
+    "event": "event-14",
+    "result": "rejected",
+    "status": 400
+  }
+]

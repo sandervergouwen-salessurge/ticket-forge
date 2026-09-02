@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "action": "create",
+    "entity": "activity",
+    "id": "e1a0000a-0000-4000-8000-00000000000a",
+    "company_id": 9876543,
+    "correlation_id": "c10f4a1-9b2e-4d77-8a10-000000000010",
+    "entity_id": 5009,
+    "is_bulk_edit": false,
+    "timestamp": "2026-09-18T15:30:00Z",
+    "type": "general",
+    "user_id": 11,
+    "version": "2.0",
+    "webhook_id": 771,
+    "webhook_owner_id": 11,
+    "change_source": "app",
+    "attempt": 1,
+    "host": "salessurge.pipedrive.com"
+  },
+  "data": {
+    "id": 5009,
+    "subject": "[SUPPORT] Scheduled post published to the wrong channel",
+    "type": "task",
+    "done": false,
+    "person_id": 208,
+    "org_id": 103,
+    "deal_id": null,
+    "owner_id": 11,
+    "add_time": "2026-09-18T15:30:00Z",
+    "update_time": "2026-09-18T15:30:00Z",
+    "note": "Went out on the corporate account instead of the brand account."
+  },
+  "previous": null
+}

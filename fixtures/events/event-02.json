@@ -1,0 +1,34 @@
+{
+  "meta": {
+    "action": "create",
+    "entity": "activity",
+    "id": "e1a00002-0000-4000-8000-000000000002",
+    "company_id": 9876543,
+    "correlation_id": "c2f4a1-9b2e-4d77-8a10-000000000002",
+    "entity_id": 5002,
+    "is_bulk_edit": false,
+    "timestamp": "2026-10-23T14:30:00Z",
+    "type": "general",
+    "user_id": 12,
+    "version": "2.0",
+    "webhook_id": 771,
+    "webhook_owner_id": 11,
+    "change_source": "app",
+    "attempt": 1,
+    "host": "salessurge.pipedrive.com"
+  },
+  "data": {
+    "id": 5002,
+    "subject": "[SUPPORT] Weekly export job produces empty CSV",
+    "type": "task",
+    "done": false,
+    "person_id": 203,
+    "org_id": 102,
+    "deal_id": null,
+    "owner_id": 12,
+    "add_time": "2026-10-23T14:30:00Z",
+    "update_time": "2026-10-23T14:30:00Z",
+    "note": "The Monday export arrived with headers only for the third week running."
+  },
+  "previous": null
+}
